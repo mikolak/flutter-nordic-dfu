@@ -99,60 +99,63 @@ class FlutterNordicDfu {
     assert(address != null, "address can not be null");
     assert(filePath != null, "file can not be null");
 
-    _channel.setMethodCallHandler((MethodCall call) {
-      switch (call.method) {
-        case "onDeviceConnected":
-          progressListener?.onDeviceConnected(call.arguments);
-          break;
-        case "onDeviceConnecting":
-          progressListener?.onDeviceConnecting(call.arguments);
-          break;
-        case "onDeviceDisconnected":
-          progressListener?.onDeviceDisconnected(call.arguments);
-          break;
-        case "onDeviceDisconnecting":
-          progressListener?.onDeviceDisconnecting(call.arguments);
-          break;
-        case "onDfuAborted":
-          progressListener?.onDfuAborted(call.arguments);
-          break;
-        case "onDfuCompleted":
-          progressListener?.onDfuCompleted(call.arguments);
-          break;
-        case "onDfuProcessStarted":
-          progressListener?.onDfuProcessStarted(call.arguments);
-          break;
-        case "onDfuProcessStarting":
-          progressListener?.onDfuProcessStarting(call.arguments);
-          break;
-        case "onEnablingDfuMode":
-          progressListener?.onEnablingDfuMode(call.arguments);
-          break;
-        case "onFirmwareValidating":
-          progressListener?.onFirmwareValidating(call.arguments);
-          break;
-        case "onError":
-          progressListener?.onError(
-            call.arguments['deviceAddress'],
-            call.arguments['error'],
-            call.arguments['errorType'],
-            call.arguments['message'],
-          );
-          break;
-        case "onProgressChanged":
-          progressListener?.onProgressChanged(
-            call.arguments['deviceAddress'],
-            call.arguments['percent'],
-            call.arguments['speed'],
-            call.arguments['avgSpeed'],
-            call.arguments['currentPart'],
-            call.arguments['partsTotal'],
-          );
-          break;
-        default:
-          break;
-      }
-    });
+    _channel.setMethodCallHandler(
+      (MethodCall call) {
+        switch (call.method) {
+          case "onDeviceConnected":
+            progressListener?.onDeviceConnected(call.arguments);
+            break;
+          case "onDeviceConnecting":
+            progressListener?.onDeviceConnecting(call.arguments);
+            break;
+          case "onDeviceDisconnected":
+            progressListener?.onDeviceDisconnected(call.arguments);
+            break;
+          case "onDeviceDisconnecting":
+            progressListener?.onDeviceDisconnecting(call.arguments);
+            break;
+          case "onDfuAborted":
+            progressListener?.onDfuAborted(call.arguments);
+            break;
+          case "onDfuCompleted":
+            progressListener?.onDfuCompleted(call.arguments);
+            break;
+          case "onDfuProcessStarted":
+            progressListener?.onDfuProcessStarted(call.arguments);
+            break;
+          case "onDfuProcessStarting":
+            progressListener?.onDfuProcessStarting(call.arguments);
+            break;
+          case "onEnablingDfuMode":
+            progressListener?.onEnablingDfuMode(call.arguments);
+            break;
+          case "onFirmwareValidating":
+            progressListener?.onFirmwareValidating(call.arguments);
+            break;
+          case "onError":
+            progressListener?.onError(
+              call.arguments['deviceAddress'],
+              call.arguments['error'],
+              call.arguments['errorType'],
+              call.arguments['message'],
+            );
+            break;
+          case "onProgressChanged":
+            progressListener?.onProgressChanged(
+              call.arguments['deviceAddress'],
+              call.arguments['percent'],
+              call.arguments['speed'],
+              call.arguments['avgSpeed'],
+              call.arguments['currentPart'],
+              call.arguments['partsTotal'],
+            );
+            break;
+          default:
+            break;
+        }
+        return;
+      },
+    );
 
     return await _channel.invokeMethod('startDfu', <String, dynamic>{
       'address': address,
