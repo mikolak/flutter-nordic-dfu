@@ -1,10 +1,12 @@
 .DS_Store
 .dart_tool/
-
+.atom/
+.idea
 .packages
 .pub/
 pubspec.lock
 
 example/assets
-
+example/lib/generated/
+example/.flutter-plugins-dependencies
 build/
