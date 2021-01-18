@@ -10,3 +10,4 @@ example/assets
 example/lib/generated/
 example/.flutter-plugins-dependencies
 build/
+flutter_export_environment.sh
